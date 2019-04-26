@@ -56,9 +56,10 @@ function Invoke-ChocoRemoteUpgrade {
             }
         }
         #Restart machines with pending Reboot
-        Test-PendingReboot -ComputerName $ComputerName -SkipConfigurationManagerClientCheck | Where-Object {$_.IsRebootpending -eq $True } | ForEach-Object {
-            Restart-Computer -ComputerName $_.ComputerName -Force
+        if ($RebootifPending){
+            Test-PendingReboot -ComputerName $ComputerName -SkipConfigurationManagerClientCheck | Where-Object {$_.IsRebootpending -eq $True } | ForEach-Object {
+                Restart-Computer -ComputerName $_.ComputerName -Force
+            }
         }
-
     }
 }
