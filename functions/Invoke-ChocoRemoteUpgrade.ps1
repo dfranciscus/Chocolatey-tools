@@ -23,29 +23,22 @@ function Invoke-ChocoRemoteUpgrade {
             $packages = [System.Collections.ArrayList]@(choco outdated -r --ignore-unfound --ignore-pinned  | Foreach-Object {
                 ($_.split("|"))[0]})
 
-            foreach ($ExcludedPackage in $ExcludedPackages)
-            {
-                if ($packages -contains $ExcludedPackage)
-                {
+            foreach ($ExcludedPackage in $ExcludedPackages){
+                if ($packages -contains $ExcludedPackage){
                     $packages.Remove($ExcludedPackage) | Out-Null
                 }
             }
-            foreach ($AddedBasePackage in $AdditionalPackage)
-            {
-                if ($packages -notcontains $AddedBasePackage)
-                {
+            foreach ($AddedBasePackage in $AdditionalPackage){
+                if ($packages -notcontains $AddedBasePackage){
                     $packages.Add($AddedBasePackage) | Out-Null
                 }
             }
-            foreach ($package in $packages)
-            {
+            foreach ($package in $packages){
                 choco upgrade $package -r -y --timeout=600 | Out-File ("c:\Windows\Temp\choco-" + $package + ".txt")
-                if ($LASTEXITCODE -ne 0)
-                {
+                if ($LASTEXITCODE -ne 0){
                     $Result = 'Failed'
                 }
-                else
-                {
+                else{
                     $Result = 'Success'
                 }
                 [PSCustomObject]@{
