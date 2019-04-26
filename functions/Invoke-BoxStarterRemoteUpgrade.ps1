@@ -9,6 +9,7 @@ function Invoke-BoxStarterRemoteUpgrade {
         [string[]]$ExcludedPackages,
         [Parameter(Mandatory=$true)]
         [string]$ScriptPath,
+        [switch]$Parallel
     )
 
    #Create dynamic upgrade list
@@ -39,9 +40,13 @@ function Invoke-BoxStarterRemoteUpgrade {
         }
     }
     #Upgrade computers with Boxstarter
-    Install-BoxstarterPackage -ComputerName $ComputerName -PackageName $ScriptPath
-    #Upgrade computers in parallel with Boxstarter
-   # $ComputerName | ForEach-Object {
-    #   start-process -RedirectStandardOutput C:\scripts\powershell\$_.txt -FilePath powershell -ArgumentList "-windowstyle hidden Install-BoxstarterPackage -ComputerName $_ -PackageName $ScriptPath" -PassThru
-   # }
+    if (!$Parallel){
+        Install-BoxstarterPackage -ComputerName $ComputerName -PackageName $ScriptPath
+    }
+    else {
+        #Upgrade computers in parallel with Boxstarter
+        $ComputerName | ForEach-Object {
+              start-process -RedirectStandardOutput C:\Windows\Temp\$_.txt -FilePath powershell -ArgumentList "-windowstyle hidden Install-BoxstarterPackage -ComputerName $_ -PackageName $ScriptPath" -PassThru
+            }
+    }
 }
