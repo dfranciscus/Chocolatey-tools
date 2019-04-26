@@ -15,22 +15,10 @@ function Invoke-ChocoRemoteUpgrade {
         [string[]]$ComputerName,
         [string[]]$AdditionalPackages,
         [string[]]$ExcludedPackages,
-        [switch]$RebootifPending,
-        [int]$JobTimeout
-       # [System.Management.Automation.ScriptBlock]$Config
+        [switch]$RebootifPending
     )
     process {
         Invoke-Command -ComputerName $ComputerName -ScriptBlock {
-            choco config set virusScannerType VirusTotal | out-null
-            choco feature enable -n virusCheck | out-null
-            choco config set commandExecutionTimeoutSeconds 1800 | out-null
-            choco feature enable -n reduceInstalledPackageSpaceUsage | out-null
-            choco feature enable -n reduceOnlyNupkgSize | out-null
-            choco feature enable -n useRememberedArgumentsForUpgrades | out-null
-            choco feature enable -n adminOnlyExecutionForNewCommand | out-null
-            choco feature enable -n adminOnlyExecutionForDownloadCommand  | out-null
-           # choco source disable --name=chocolatey | out-null
-
             #Get list of locally installed packages to upgrade
             $packages = [System.Collections.ArrayList]@(choco outdated -r --ignore-unfound --ignore-pinned  | Foreach-Object {
                 ($_.split("|"))[0]})
