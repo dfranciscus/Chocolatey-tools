@@ -1,10 +1,8 @@
 # Chocolatey-tools
 
-![Build Status](https://build.status.url.here)
-
 ## Description
 
-PowerShell module for managing Chocolatey
+PowerShell module for managing Chocolatey internalizing and remote upgrading of client packages
 
 Authored by Dan Franciscus
 
