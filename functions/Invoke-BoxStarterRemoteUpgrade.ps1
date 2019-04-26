@@ -3,11 +3,12 @@ function Invoke-BoxStarterRemoteUpgrade {
     param(
         [Parameter(Mandatory=$true)]
         [string[]]$ComputerName,
+        [Parameter(Mandatory=$true)]
         [pscredential]$Credential,
         [string[]]$AdditionalPackages,
         [string[]]$ExcludedPackages,
+        [Parameter(Mandatory=$true)]
         [string]$ScriptPath,
-        [int]$JobTimeout
     )
 
    #Create dynamic upgrade list

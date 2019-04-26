@@ -17,6 +17,9 @@
             [string[]]$TriggerPackages,
             [Parameter(Mandatory=$true)]
             [string]$UpgradeScriptPath,
+            [Parameter(Mandatory=$true)]
+            [string]$TriggeredTime,
+            [Parameter(Mandatory=$true)]
             [System.Management.Automation.PSCredential]$Credential
         )
         process {
@@ -24,9 +27,9 @@
                 if ($TriggerPackages -contains $Package.Name){
                     Write-Output  "Creating scheduled task"
                     Disable-ScheduledTask -TaskName 'Triggered Choco Upgrade' | Unregister-ScheduledTask -Confirm:$False
-                    $Time = New-ScheduledTaskTrigger -At '11:59 PM' -Once
+                    $Time = New-ScheduledTaskTrigger -At $TriggeredTime -Once
                     $PS = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument "-file $UpgradeScriptPath"
-                    Register-ScheduledTask -User $Credential.UserName -Description 'This task is created when a popular third party software should be updated on clients' -TaskName 'Triggered Choco Upgrade' -Trigger $Time -Action $PS -Password $Credential.GetNetworkCredential().password -RunLevel Highest
+                    Register-ScheduledTask -User $Credential.UserName -Description 'This task is created when a certain third party software should be updated on clients' -TaskName 'Triggered Choco Upgrade' -Trigger $Time -Action $PS -Password $Credential.GetNetworkCredential().password -RunLevel Highest
                     Exit
                 }
             }

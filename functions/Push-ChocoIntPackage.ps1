@@ -17,6 +17,7 @@ function Push-ChocoIntPackage {
         [string]$Path,
         [Parameter(Mandatory=$true)]
         [string]$RepositoryURL,
+        [Parameter(Mandatory=$true)]
         [ValidateNotNull()]
         [System.Management.Automation.PSCredential]$ApiKey
     )
