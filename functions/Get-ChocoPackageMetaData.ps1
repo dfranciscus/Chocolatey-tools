@@ -55,7 +55,7 @@ Function Get-ChocoPackageMetaData {
            Foreach($member in $AdditionalInformation){
 
                 if($member -eq 'Dependencies'){
-                    $obj.Add("$member",$($xml.package.metadata.dependencies.dependency))
+                    $obj.Add("$member",$($xml.package.metadata.dependencies.dependency | Select-Object Id,Version))
                 }
 
                 else{
