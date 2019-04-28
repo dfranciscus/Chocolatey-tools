@@ -20,10 +20,6 @@ Function Get-ChocoPackageMetaData {
     .NOTES
     Written by Stephen Valdinger of Chocolatey Software for Dan Franciscus
 
-    Dependencies work a little funny in how they get stuffed into the object. They come back as an object themselves, so special care must be taken to unroll them.
-
-    e.g.
-    Get-ChocoPackageMetaData -ChocolateyPackage C:\packages\googlechrome.nupkg -AdditionalInformation Dependencies | Select-Object -ExpandProperty Dependencies
     #>
 
     [cmdletBinding()]
