@@ -41,7 +41,7 @@ function Invoke-BoxStarterRemoteUpgrade {
     }
     #Upgrade computers with Boxstarter
     if (!$Parallel){
-        Install-BoxstarterPackage -ComputerName $ComputerName -PackageName $ScriptPath
+        Install-BoxstarterPackage -ComputerName $ComputerName -PackageName $ScriptPath -DelegateChocoSources
     }
     else {
         #Upgrade computers in parallel with Boxstarter

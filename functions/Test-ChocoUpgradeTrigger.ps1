@@ -25,7 +25,7 @@
         process {
             foreach ($Package in $PackageNames){
                 if ($TriggerPackages -contains $Package.Name){
-                    Write-Output  "Creating scheduled task"
+                    Write-Output  "Creating scheduled task for $($Package.Name)"
                     Disable-ScheduledTask -TaskName 'Triggered Choco Upgrade' | Unregister-ScheduledTask -Confirm:$False
                     $Time = New-ScheduledTaskTrigger -At $TriggeredTime -Once
                     $PS = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument "-file $UpgradeScriptPath"

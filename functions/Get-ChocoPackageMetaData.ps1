@@ -9,36 +9,25 @@ Function Get-ChocoPackageMetaData {
     .PARAMETER ChocolateyPackage
     The chocolatey package(s) you wish to extract data from
 
-    .PARAMETER AdditonalInformation
-    Return more information about the package than the default ID and Version
-
     .EXAMPLE
     Get-ChocoPackageMetaData -ChocolateyPackage C:\Packages\googlechrome.nupkg
 
-    .EXAMPLE
-    Get-ChocoPackageMetaData -ChocolateyPackage C:\Packages\googlechrome.nupkg -AdditionalInformation Owners,Description,ProjectUrl,Dependencies
     .NOTES
     Written by Stephen Valdinger of Chocolatey Software for Dan Franciscus
-
     #>
 
     [cmdletBinding()]
     Param(
         [ValidateScript({Test-Path $_})]
         [String[]]
-        $ChocolateyPackage,
-
-        [Parameter()]
-        [String[]]
-        [ValidateSet('Authors','Description','ProjectUrl','Owners','Licenseurl','Iconurl','Dependencies')]
-        $AdditionalInformation
+        $ChocolateyPackage
     )
 
     begin { $null = Add-Type -Assemblyname "System.IO.Compression.Filesystem" }
 
     process {
         Foreach($package in $ChocolateyPackage){
-            $obj = [ordered]@{}
+            $obj = @{}
             $entry =  [IO.Compression.Zipfile]::OpenRead($package).Entries |
             Where-Object { $_.Name -match "nuspec" }
             $stream = $entry.Open()
@@ -47,19 +36,6 @@ Function Get-ChocoPackageMetaData {
             [xml]$xml = $text
             $obj.Add("Name","$($xml.package.metadata.id)")
             $obj.Add("Version","$($xml.package.metadata.version)")
-
-           Foreach($member in $AdditionalInformation){
-
-                if($member -eq 'Dependencies'){
-                    $obj.Add("$member",$($xml.package.metadata.dependencies.dependency | Select-Object Id,Version))
-                }
-
-                else{
-                    $obj.Add("$member",$($xml.package.metadata.$($member)))
-                }
-
-           }
-
             $reader.Close()
             $stream.Close()
             [pscustomobject]$obj
