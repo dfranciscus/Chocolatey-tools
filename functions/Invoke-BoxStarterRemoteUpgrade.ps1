@@ -50,7 +50,7 @@ function Invoke-BoxStarterRemoteUpgrade {
             }
         }
         $Packages | ForEach-Object {
-            Add-Content $ScriptPath -Value "choco upgrade $_ -r -y --timeout=600"
+            Add-Content $ScriptPath -Value "choco upgrade $_ -r -y"
         }
     }
     if (!$Parallel){
