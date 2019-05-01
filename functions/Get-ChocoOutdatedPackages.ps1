@@ -1,12 +1,17 @@
 <#
 .SYNOPSIS
-    Short description
+    Find outdated packages from a local machine
 .DESCRIPTION
-    Long description
+    Wrapper around choco outdated -r. Ignores pinned and unfound packages from sources
 .EXAMPLE
-    Example of how to use this cmdlet
-.EXAMPLE
-    Another example of how to use this cmdlet
+PS C:\> Get-ChocoOutdatedPackages
+
+Name                 CurrentVersion Version       Pinned
+----                 -------------- -------       ------
+chocolatey.extension 2.0.1          2.0.2         false
+curl                 7.64.0         7.64.1        false
+GoogleChrome         73.0.3683.103  74.0.3729.131 false
+
 #>
 function Get-ChocoOutdatedPackages {
     [CmdletBinding()]

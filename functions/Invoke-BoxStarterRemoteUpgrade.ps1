@@ -1,3 +1,18 @@
+<#
+.SYNOPSIS
+    Uses Install-Boxstarterpackage to install packages remotely. In addition, provides ability to deploy new packages and exclude packages.
+.DESCRIPTION
+    Long description
+.EXAMPLE
+    Here, we upgrade any out of date packages on winclient2, push out curl and git packages and exclude jre8 from updating.
+    Each of these commands is created dynamically at runtime on a text file on the local machine called Boxstarterupgrade.txt
+
+    Invoke-BoxStarterRemoteUpgrade -ComputerName winclient2 -Credential $DomainCred -AdditionalPackages curl,git -ExcludedPackages jre8 -ScriptPath C:\Windows\Temp\BoxstarterUpgrade.txt
+.EXAMPLE
+     Here we use the -Parallel switch so that each remote machine is processed at the same time.
+
+      Invoke-BoxStarterRemoteUpgrade -ComputerName winclient2 -Credential $DomainCred -AdditionalPackages curl,git -Parallel -ScriptPath C:\Windows\Temp\BoxstarterUpgrade.txt
+#>
 function Invoke-BoxStarterRemoteUpgrade {
     [CmdletBinding()]
     param(
@@ -12,7 +27,6 @@ function Invoke-BoxStarterRemoteUpgrade {
         [switch]$Parallel
     )
 
-   #Create dynamic upgrade list
     Invoke-Command -ArgumentList $AdditionalPackages,$ExcludedPackages,$ScriptPath -ComputerName $ComputerName -ScriptBlock {
         param (
             $AdditionalPackages,
@@ -39,12 +53,10 @@ function Invoke-BoxStarterRemoteUpgrade {
             Add-Content $ScriptPath -Value "choco upgrade $_ -r -y --timeout=600"
         }
     }
-    #Upgrade computers with Boxstarter
     if (!$Parallel){
         Install-BoxstarterPackage -ComputerName $ComputerName -PackageName $ScriptPath -DelegateChocoSources
     }
     else {
-        #Upgrade computers in parallel with Boxstarter
         $ComputerName | ForEach-Object {
               start-process -RedirectStandardOutput C:\Windows\Temp\$_.txt -FilePath powershell -ArgumentList "-windowstyle hidden Install-BoxstarterPackage -ComputerName $_ -PackageName $ScriptPath" -PassThru
             }
