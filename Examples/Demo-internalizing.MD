@@ -1,5 +1,10 @@
  There are various ways to internalize community packages. The approach in this example is that you have a machine with all packages that you want to internalize already installed. This machine will perform choco outdated to find any packages that have newer versions available on the Chocolatey community repo. It then internalizes them, upgrades them to test they work, finally pushing them to an internal repo.
 
+### Prerequisites:
+- Chocolatey licensed version
+- All packages already installed on the machine that runs the following examples:
+
+
 ### Find outdated packages
 ```
 PS C:\> $Outdatedpkgs = Get-ChocoOutdatedPackages
