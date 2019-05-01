@@ -7,7 +7,8 @@ PowerShell module for managing Chocolatey internalizing and remote upgrading of 
 
 Authored by Dan Franciscus
 
-## Examples - https://github.com/dfranciscus/Chocolatey-tools/tree/master/Examples
+## Examples - 
+[Demos](https://github.com/dfranciscus/Chocolatey-tools/tree/master/Examples)
 
 ## Installing
 
