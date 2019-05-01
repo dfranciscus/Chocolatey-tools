@@ -4,9 +4,19 @@
 .DESCRIPTION
     Long description
 .EXAMPLE
-    Example of how to use this cmdlet
-.EXAMPLE
-    Another example of how to use this cmdlet
+PS C:\Chocotemp> $Upgradepkgs = Invoke-ChocoUpgradeIntPackage -PackageNames $intpkgs -Path $Path |
+ Where-Object {$_.Result -eq 'Upgrade Success'}
+
+PS C:\Chocotemp> Push-ChocoIntPackage -PackageNames $Upgradepkgs -Path $Path `
+-ApiKey $Api -RepositoryURL $LocalRepo |
+Where-Object {$_.Result -like 'Push Success'}
+
+Name                      Result       Version       NuGetPackage
+----                      ------       -------       ------------
+curl                      Push Success 7.64.1        C:\Chocotemp\curl.7.64.1.nupkg
+chocolatey-core.extension Push Success 1.3.3         C:\Chocotemp\chocolatey-core.extension.1.3.3.nupkgpkg
+GoogleChrome              Push Success 74.0.3729.131 C:\Chocotemp\GoogleChrome.74.0.3729.131.nupkg
+
 #>
 function Push-ChocoIntPackage {
     [CmdletBinding()]

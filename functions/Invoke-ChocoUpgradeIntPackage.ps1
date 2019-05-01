@@ -1,12 +1,18 @@
 <#
 .SYNOPSIS
-    Short description
-.DESCRIPTION
-    Long description
+Takes PSobject to perform a choco upgrade an each package
 .EXAMPLE
-    Example of how to use this cmdlet
-.EXAMPLE
-    Another example of how to use this cmdlet
+    PS C:\> $intpkgs = Invoke-ChocoInternalizePackage -PackageNames $Outdatedpkgs -Path $Path `
+-PurgeWorkingDirectory | Where-Object { $_.Result -Like 'Internalize Success' }
+
+PS C:\Chocotemp> Invoke-ChocoUpgradeIntPackage -PackageNames $intpkgs -Path $Path |
+ Where-Object {$_.Result -eq 'Upgrade Success'}
+
+Name         Result          Version       NuGetpkgs
+----         ------          -------       ---------
+curl         Upgrade Success 7.64.1        C:\Chocotemp\curl.7.64.1.nupkg
+GoogleChrome Upgrade Success 74.0.3729.131 {C:\Chocotemp\chocolatey-core.extension.1.3.3.nupkg, C:\Chocotemp\GoogleChr...
+
 #>
 function Invoke-ChocoUpgradeIntPackage {
     [CmdletBinding()]

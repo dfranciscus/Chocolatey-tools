@@ -1,12 +1,21 @@
     <#
     .SYNOPSIS
-        Short description
-    .DESCRIPTION
-        Long description
+        Tests each package a PSObject to see if it meets an item in -TriggerPackages. If so, it will create
+        a scheduled task on the local machine. Use case would be a scheduled job for upgrading Chocolatey clients.
     .EXAMPLE
-        Example of how to use this cmdlet
-    .EXAMPLE
-        Another example of how to use this cmdlet
+    Here we pipe all of the internalizing commands together with Test-Trigger.
+
+    PS C:\Chocotemp> Get-ChocoOutdatedPackages |
+    Invoke-ChocoInternalizePackage -Path $Path -PurgeWorkingDirectory | Where-Object { $_.Result -Like 'Internalize Success' } |
+    Invoke-ChocoUpgradeIntPackage -Path $Path | Where-Object {$_.Result -eq 'Upgrade Success'} |
+    Push-ChocoIntPackage -Path $Path -ApiKey $Api -RepositoryURL $LocalRepo |
+    Test-ChocoUpgradeTrigger -TriggerPackages 'googlechrome' -UpgradeScriptPath c:\test.ps1 -TriggeredTime '12 PM' -Credential $DomainCred
+    Creating scheduled task for GoogleChrome
+
+    TaskPath                                       TaskName                          State
+    --------                                       --------                          -----
+        \                                              Triggered Choco Upgrade           Ready
+    PS C:\Chocotemp>
     #>
     function Test-ChocoUpgradeTrigger {
         [CmdletBinding()]
@@ -25,7 +34,7 @@
         process {
             foreach ($Package in $PackageNames){
                 if ($TriggerPackages -contains $Package.Name){
-                    Write-Output  "Creating scheduled task for $($Package.Name)"
+                    Write-Output  "Creating scheduled task because $($Package.Name) is a triggered package"
                     Disable-ScheduledTask -TaskName 'Triggered Choco Upgrade' | Unregister-ScheduledTask -Confirm:$False
                     $Time = New-ScheduledTaskTrigger -At $TriggeredTime -Once
                     $PS = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument "-file $UpgradeScriptPath"

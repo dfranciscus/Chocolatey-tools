@@ -1,12 +1,18 @@
 <#
 .SYNOPSIS
-    Short description
+    Takes PSobject as input to internalize packages
 .DESCRIPTION
     Long description
 .EXAMPLE
-    Example of how to use this cmdlet
-.EXAMPLE
-    Another example of how to use this cmdlet
+S C:\> $Outdatedpkgs = Get-ChocoOutdatedPackages
+PS C:\> Invoke-ChocoInternalizePackage -PackageNames $Outdatedpkgs -Path $Path `
+-PurgeWorkingDirectory | Where-Object { $_.Result -Like 'Internalize Success' }
+
+Name         Result              Version       NuGetpkgs
+----         ------              -------       ---------
+curl         Internalize Success 7.64.1        C:\Chocotemp\curl.7.64.1.nupkg
+GoogleChrome Internalize Success 74.0.3729.131 {C:\Chocotemp\chocolatey-core.extension.1.3.3.nupkg, C:\Chocotemp\Googl...
+
 #>
 function Invoke-ChocoInternalizePackage {
     [CmdletBinding()]
