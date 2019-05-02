@@ -1,10 +1,28 @@
 <#
 .SYNOPSIS
-    Short description
-.DESCRIPTION
-    Long description
+    Use PowerShell remoting with to remotely update clients by adding and excluding packages. This function uses
+    Invoke-Command to connect and run choco upgrade for any outdated packages.
 .EXAMPLE
-    Example of how to use this cmdlet
+    PS C:\Chocotemp> Invoke-ChocoRemoteUpgrade -ComputerName winclient,winclient2 -Credential $DomainCred `
+ -AdditionalPackages firefox -RebootifPending | Select-Object -Property Name,Result,Computer |
+ Format-List
+
+
+Name     : googlechrome
+Result   : Failed
+Computer : WINCLIENT2
+
+Name     : googlechrome
+Result   : Failed
+Computer : WINCLIENT
+
+Name     : firefox
+Result   : Success
+Computer : WINCLIENT2
+
+Name     : firefox
+Result   : Success
+Computer : WINCLIENT
 .EXAMPLE
     Another example of how to use this cmdlet
 #>
@@ -19,7 +37,6 @@ function Invoke-ChocoRemoteUpgrade {
         [switch]$RebootifPending
     )
     process {
-        #Create dynamic upgrade list
     Invoke-Command -ArgumentList $AdditionalPackages,$ExcludedPackages,$ScriptPath,$Credential -ComputerName $ComputerName -ScriptBlock {
         param (
             $AdditionalPackages,
@@ -58,7 +75,6 @@ function Invoke-ChocoRemoteUpgrade {
             }
         }
     }
-    #Restart machines with pending Reboot
     if ($RebootifPending){
         Test-PendingReboot -ComputerName $ComputerName -SkipConfigurationManagerClientCheck | Where-Object {$_.IsRebootpending -eq $True } | ForEach-Object {
             "Rebooting $($_.ComputerName)"
