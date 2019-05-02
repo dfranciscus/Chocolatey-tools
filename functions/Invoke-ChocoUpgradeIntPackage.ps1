@@ -26,7 +26,6 @@ function Invoke-ChocoUpgradeIntPackage {
         foreach ($Package in $PackageNames){
             Write-Verbose ("Upgrading " + $Package.Name)
             choco upgrade $Package.Name --source $Path --no-progress -y -r | Write-Verbose
-            #If failure detected in output continue to next package
             if ($LASTEXITCODE -ne 0){
                 $Result = 'Upgrade Failed'
             }
