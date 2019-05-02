@@ -24,13 +24,11 @@ function Get-ChocoOutdatedPackages {
             $OutdatedPackages
             Exit
         }
-        #If no updated packages are available then exit
         if ($LASTEXITCODE -eq 0){
             Write-Verbose -Message 'No new packages available. Exiting'
             Exit
         }
         else {
-           # $NewPackages =
         foreach ($NewPackage in $OutdatedPackages){
             [PSCustomObject]@{
                 Name = $NewPackage.Split('|')[0]
