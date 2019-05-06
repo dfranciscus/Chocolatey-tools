@@ -6,6 +6,7 @@
 
 
 ### Find outdated packages
+All out of date packages are found
 ```
 PS C:\> $Outdatedpkgs = Get-ChocoOutdatedPackages
 PS C:\> $Outdatedpkgs
@@ -17,6 +18,7 @@ curl                 7.64.0         7.64.1        false
 GoogleChrome         73.0.3683.103  74.0.3729.131 false
 ```
 ### Internalize outdated packages
+Next, each out of date package is internalized, including dependencies.
 ```
 PS C:\> $intpkgs = Invoke-ChocoInternalizePackage -PackageNames $Outdatedpkgs -Path $Path `
 -PurgeWorkingDirectory | Where-Object { $_.Result -Like 'Internalize Success' }
@@ -27,7 +29,8 @@ Name         Result              Version       NuGetpkgs
 curl         Internalize Success 7.64.1        C:\Chocotemp\curl.7.64.1.nupkg
 GoogleChrome Internalize Success 74.0.3729.131 {C:\Chocotemp\chocolatey-core.extension.1.3.3.nupkg, C:\Chocotemp\Googl...
 ```
-### Upgrade internalized packages to ensure they install correctly.
+### Upgrade internalized packages
+Each internalized package is upgraded to ensure package works
 ```
 PS C:\Chocotemp> $Upgradepkgs = Invoke-ChocoUpgradeIntPackage -PackageNames $intpkgs -Path $Path |
  Where-Object {$_.Result -eq 'Upgrade Success'}
@@ -39,6 +42,7 @@ curl         Upgrade Success 7.64.1        C:\Chocotemp\curl.7.64.1.nupkg
 GoogleChrome Upgrade Success 74.0.3729.131 {C:\Chocotemp\chocolatey-core.extension.1.3.3.nupkg, C:\Chocotemp\GoogleChr...
 ```
 ### Push packages that were successfully upgrade to an internal repo
+If choco upgrade is successful, the package is pushed to a local repo.
 ```
 PS C:\Chocotemp> $Pushed = Push-ChocoIntPackage -PackageNames $Upgradepkgs -Path $Path `
 -ApiKey $Api -RepositoryURL $LocalRepo | Where-Object {$_.Result -like 'Push Success'}
