@@ -31,8 +31,7 @@ GoogleChrome Internalize Success 74.0.3729.131 {C:\Chocotemp\chocolatey-core.ext
 ```
 PS C:\Chocotemp> $Upgradepkgs = Invoke-ChocoUpgradeIntPackage -PackageNames $intpkgs -Path $Path |
  Where-Object {$_.Result -eq 'Upgrade Success'}
-PS C:\Chocotemp> Where-Object {$_.Result -eq 'Upgrade Success'}
-$Upgradepkgs
+PS C:\Chocotemp> $Upgradepkgs
 
 Name         Result          Version       NuGetpkgs
 ----         ------          -------       ---------
@@ -42,8 +41,7 @@ GoogleChrome Upgrade Success 74.0.3729.131 {C:\Chocotemp\chocolatey-core.extensi
 ### Push packages that were successfully upgrade to an internal repo
 ```
 PS C:\Chocotemp> $Pushed = Push-ChocoIntPackage -PackageNames $Upgradepkgs -Path $Path `
--ApiKey $Api -RepositoryURL $LocalRepo |
-Where-Object {$_.Result -like 'Push Success'}
+-ApiKey $Api -RepositoryURL $LocalRepo | Where-Object {$_.Result -like 'Push Success'}
 PS C:\Chocotemp> $Pushed
 
 Name                      Result       Version       NuGetPackage
