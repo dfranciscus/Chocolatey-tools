@@ -1,7 +1,7 @@
     <#
     .SYNOPSIS
         Tests each package a PSObject to see if it meets an item in -TriggerPackages. If so, it will create
-        a scheduled task on the local machine. Use case would be a scheduled job for upgrading Chocolatey clients.
+        a scheduled task on a local or remote machine with CIM. Use case would be a scheduled job for upgrading Chocolatey clients.
     .EXAMPLE
     Here we pipe all of the internalizing commands together with Test-Trigger.
 
