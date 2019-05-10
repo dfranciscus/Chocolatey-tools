@@ -29,16 +29,18 @@
             [Parameter(Mandatory=$true)]
             [string]$TriggeredTime,
             [Parameter(Mandatory=$true)]
-            [System.Management.Automation.PSCredential]$Credential
+            [System.Management.Automation.PSCredential]$Credential,
+            [String]$ComputerName
         )
         process {
             foreach ($Package in $PackageNames){
                 if ($TriggerPackages -contains $Package.Name){
                     Write-Output  "Creating scheduled task because $($Package.Name) is a triggered package"
-                    Disable-ScheduledTask -TaskName 'Triggered Choco Upgrade' | Unregister-ScheduledTask -Confirm:$False
+                    $Cim = New-CimSession -ComputerName $ComputerName -Credential $Credential
+                    Disable-ScheduledTask -CimSession $Cim -TaskName 'Triggered Choco Upgrade' | Unregister-ScheduledTask -CimSession $Cim -Confirm:$False
                     $Time = New-ScheduledTaskTrigger -At $TriggeredTime -Once
                     $PS = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument "-file $UpgradeScriptPath"
-                    Register-ScheduledTask -User $Credential.UserName -Description 'This task is created when a certain third party software should be updated on clients' -TaskName 'Triggered Choco Upgrade' -Trigger $Time -Action $PS -Password $Credential.GetNetworkCredential().password -RunLevel Highest
+                    Register-ScheduledTask -CimSession $Cim -User $Credential.UserName -Description 'This task is created when a certain third party software should be updated on clients' -TaskName 'Triggered Choco Upgrade' -Trigger $Time -Action $PS -Password $Credential.GetNetworkCredential().password -RunLevel Highest
                     Exit
                 }
             }
