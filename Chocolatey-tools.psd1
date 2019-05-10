@@ -12,7 +12,7 @@
 RootModule = 'Chocolatey-tools.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1'
+ModuleVersion = '0.4'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -24,13 +24,13 @@ GUID = 'a4e9d9bb-de0f-4f79-b1b4-535b681ab285'
 Author = 'Dan Franciscus'
 
 # Company or vendor of this module
-CompanyName = 'Dan Franciscus'
+CompanyName = 'CNJ Computing LLC'
 
 # Copyright statement for this module
 Copyright = '(c) 2019 Dan Franciscus. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'PowerShell module for managing Chocolatey'
+Description = 'PowerShell module for managing Chocolatey internalizing'
 
 # Minimum version of the Windows PowerShell engine required by this module
 # PowerShellVersion = ''
@@ -101,7 +101,7 @@ PrivateData = @{
         # LicenseUri = ''
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+         ProjectUri = 'https://github.com/dfranciscus/Chocolatey-tools'
 
         # A URL to an icon representing this module.
         # IconUri = ''
