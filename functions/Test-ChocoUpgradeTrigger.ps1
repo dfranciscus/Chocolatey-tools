@@ -41,7 +41,7 @@
                     $Time = New-ScheduledTaskTrigger -At $TriggeredTime -Once
                     $PS = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument "-file $UpgradeScriptPath"
                     Register-ScheduledTask -CimSession $Cim -User $Credential.UserName -Description 'This task is created when a certain third party software should be updated on clients' -TaskName 'Triggered Choco Upgrade' -Trigger $Time -Action $PS -Password $Credential.GetNetworkCredential().password -RunLevel Highest
-                    Exit
+                    Break
                 }
             }
         }
