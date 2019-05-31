@@ -24,6 +24,10 @@ function Invoke-ChocoInternalizePackage {
         [switch]$PurgeWorkingDirectory
     )
     begin {
+        if (-not (Test-Path -Path  $env:ChocolateyInstall\license\chocolatey.license.xml)){
+            Throw 'Chocolatey license not found. Internalizing is only supported in licensed versions.'
+            return
+        }
         if ($PurgeWorkingDirectory){
             Get-ChildItem -Path $Path -Recurse | Remove-Item -Recurse -Force
         }
