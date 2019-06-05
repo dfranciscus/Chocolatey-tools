@@ -19,7 +19,7 @@ function Get-ChocoOutdatedPackages {
     )
         Write-Verbose "Getting local outdated packages"
         $OutdatedPackages = (choco outdated -r --ignore-pinned --ignore-unfound --timeout=60)
-        if (!($OutdatedPackages){
+        if (!($OutdatedPackages)){
             Write-Verbose -Message 'No outdated packages'
             Exit
         }
