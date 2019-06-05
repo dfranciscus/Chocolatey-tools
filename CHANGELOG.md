@@ -1,19 +1,11 @@
 # Chocolatey-tools Release History
 
-## Version Number - Release Date
+## 0.4.3 - 6/5/2019
 
 ### Fixed
 
-* First item fixed
+* Get-ChocoOutdatedPackages was failing due to change in $LASTEXITCODE handling in latest
+Chocolatey version (0.10.15)
 * Second item fixed
 
-### Added
-
-* New item added
-* Another new item added
-
-### Changed
-
-* Feature changed
-* Tests added
 
