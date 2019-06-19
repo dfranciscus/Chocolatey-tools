@@ -12,7 +12,7 @@
 RootModule = 'Chocolatey-tools.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.4.3'
+ModuleVersion = '0.4.4'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -95,7 +95,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        # Tags = @()
+         Tags = @('Chocolatey','Software')
 
         # A URL to the license for this module.
         # LicenseUri = ''
