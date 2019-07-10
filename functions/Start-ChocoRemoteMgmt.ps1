@@ -9,6 +9,16 @@ function Start-ChocoRemoteMgmt {
      We also use the function Get-ChocoSourcePackages to pull all packages from Chocolatey sources configured on the local computer.
 
      Start-ChocoRemotemgmt -ComputerName (Get-ADComputer -Filter | Select-Object -ExpandProperty Name) -Packages (Get-ChocoSourcePackages -Sources repo1,repo2)
+
+     Button actions:
+
+     Reboot - Will prompt for confirmation and reboot the computer shown in Computer Name.
+     Show Current User - Show the current logged on user for remote computer.
+     Show Outdated - Show what Chocolatey packages are outdated on the remote machine.
+     Install - Install a Chocolatey package that is selected from the Packages list on the remote computer.
+     Upgrade - Upgrade a Chocolatey package that is selected from the Packages list on the remote computer.
+     Unistall - Upgrade - Uninstall a Chocolatey package that is selected from the Packages list on the remote computer.
+     Show Installed - Show what Chocolatey packages and versions are installed on remote computer.
  #>
     [CmdletBinding()]
     param (

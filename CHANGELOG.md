@@ -1,4 +1,9 @@
 # Chocolatey-tools Release History
+## 0.4.7 - 7/10/2019
+
+### Fixed
+
+* Help stuff
 
 ## 0.4.5 - 7/10/2019
 
