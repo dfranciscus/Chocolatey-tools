@@ -1,8 +1,9 @@
- <#
+
+Function Invoke-RebootPrompt {
+<#
  .SYNOPSIS
      Used in Start-ChocoRemotemgmt to prompt if a user wants to reboot a computer.
  #>
-Function Invoke-RebootPrompt {
 param(
     $Message = "Click OK to reboot",
     $Title = "Continue or Cancel"

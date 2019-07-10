@@ -1,10 +1,11 @@
+
+ function Get-ChocoSourcePackages {
 <#
  .SYNOPSIS
      Outputs all package names for one or multiple Chocolatey sources.
  .EXAMPLE
      Get-ChocoSourcePackages -Sources repo1,repo2
  #>
- function Get-ChocoSourcePackages {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]

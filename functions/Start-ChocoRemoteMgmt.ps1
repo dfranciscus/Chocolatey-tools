@@ -1,4 +1,6 @@
  #requires -modules Invoke-CommandAs
+
+function Start-ChocoRemoteMgmt {
  <#
  .SYNOPSIS
      Starts a Winforms GUI for remote management of Chocolatey clients.
@@ -8,7 +10,6 @@
 
      Start-ChocoRemotemgmt -ComputerName (Get-ADComputer -Filter | Select-Object -ExpandProperty Name) -Packages (Get-ChocoSourcePackages -Sources repo1,repo2)
  #>
-function Start-ChocoRemoteMgmt {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
