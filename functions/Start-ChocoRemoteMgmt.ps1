@@ -111,9 +111,10 @@ function Start-ChocoRemoteMgmt {
     Write-output "Installing"
     $chocoutput = Invoke-CommandAs -AsSystem -ComputerName $ComputerList.Text -ScriptBlock {
         choco install $args[0] -y -r
+    } -ArgumentList $PackageList.SelectedItem
     Write-output "Done"
     $outputBox.Text = $chocoutput
-    }
+
 })
 
     $Outdatepackage = New-Object system.windows.Forms.Button
@@ -125,7 +126,7 @@ function Start-ChocoRemoteMgmt {
     $Form.controls.Add($Outdatepackage)
     $Outdatepackage.add_Click({
     $outputBox.Text = ""
-    $outputBox.Text = ("Finding outdated packages" +  $PackageList.SelectedItem + " on " +  $ComputerList.Text)
+    $outputBox.Text = ("Finding outdated packages on " +  $ComputerList.Text)
     Write-output "Listing installed packages"
     $chocoutput = Invoke-CommandAs -AsSystem -ComputerName $ComputerList.Text -ScriptBlock {
         choco outdated -r --ignore-unfound --ignore-pinned  | Out-String
@@ -143,7 +144,7 @@ function Start-ChocoRemoteMgmt {
     $Form.controls.Add($listPackage)
     $ListPackage.add_Click({
     $outputBox.Text = ""
-    $outputBox.Text = ("Finding installed packages" +  $PackageList.SelectedItem + " on " +  $ComputerList.Text)
+    $outputBox.Text = ("Finding installed packages on " +  $ComputerList.Text)
     Write-output "Listing installed packages"
     $chocoutput = Invoke-CommandAs -AsSystem -ComputerName $ComputerList.Text -ScriptBlock {
         choco list -lo -r | Out-String }
@@ -164,7 +165,7 @@ function Start-ChocoRemoteMgmt {
     Write-output "Installing"
     $chocoutput = Invoke-CommandAs -AsSystem  -ComputerName $ComputerList.Text -ScriptBlock {
         choco upgrade $args[0] -y -r
-    }
+    } -ArgumentList $PackageList.SelectedItem
     Write-output "Done"
     $outputBox.Text = $chocoutput
     })
