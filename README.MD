@@ -2,8 +2,7 @@
 
 ## Description
 
-PowerShell module for managing Chocolatey internalizing for enterprises and remote upgrading of client packages with PowerShell remoting and Boxstarter.
-
+PowerShell module for managing Chocolatey internalizing for enterprises and remote upgrading of client packages with PowerShell remoting and Boxstarter. Includes Chocolatey Remote Management GUI which allows remote install, uninstall, upgrading, rebooting of remote Chocolatey clients.
 
 Authored by Dan Franciscus
 
