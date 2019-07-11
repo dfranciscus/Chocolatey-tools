@@ -51,7 +51,9 @@ Description = 'PowerShell module for managing Chocolatey internalizing'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-# RequiredModules = @()
+ RequiredModules = @(
+     @{ModuleName = 'Invoke-CommandAs'; ModuleVersion = '2.2'}
+     )
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
