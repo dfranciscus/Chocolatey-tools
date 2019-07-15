@@ -10,6 +10,6 @@ Here I use Active Directory to get a list of all computers which will populate t
 ```
 Start-ChocoRemoteMgmt -ComputerName (Get-ADComputer -Filter * | Select-Object -ExpandProperty Name) -Packages (Get-ChocoSourcePackages -Packages myrepo1,myrepo2,myrepo3)
 ```
-![alt text](https://github.com/dfranciscus/Chocolatey-tools/Examples/ChocoRemoteGUI.JPG "Chocolatey GUI")
+![Chocolatey GUI](https://github.com/dfranciscus/Chocolatey-tools/blob/master/Examples/ChocoRemoteGUI.JPG)
 
 
