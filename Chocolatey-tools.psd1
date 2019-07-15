@@ -12,7 +12,7 @@
 RootModule = 'Chocolatey-tools.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.4.9'
+ModuleVersion = '0.4.10'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -30,7 +30,7 @@ CompanyName = 'CNJ Computing LLC'
 Copyright = '(c) 2019 Dan Franciscus. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'PowerShell module for managing Chocolatey internalizing'
+Description = 'PowerShell module for managing Chocolatey internalizing and remote management'
 
 # Minimum version of the Windows PowerShell engine required by this module
 # PowerShellVersion = ''
@@ -52,7 +52,7 @@ Description = 'PowerShell module for managing Chocolatey internalizing'
 
 # Modules that must be imported into the global environment prior to importing this module
  RequiredModules = @(
-    @{ModuleName = 'Invoke-CommandAs'; RequiredVersion = '3.1.3'}
+    @{ModuleName = 'Invoke-CommandAs'; RequiredVersion = '3.1.5'}
      )
 
 # Assemblies that must be loaded prior to importing this module

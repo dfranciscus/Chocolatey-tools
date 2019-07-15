@@ -1,4 +1,10 @@
 # Chocolatey-tools Release History
+## 0.4.10 - 7/15/2019
+
+### Added
+
+* Changed Invoke-CommandAs version to 3.1.5
+
 ## 0.4.9 - 7/11/2019
 
 ### Fixed
