@@ -1,3 +1,4 @@
+    function Test-ChocoUpgradeTrigger {
     <#
     .SYNOPSIS
         Tests each package a PSObject to see if it meets an item in -TriggerPackages. If so, it will create
@@ -17,7 +18,6 @@
         \                                              Triggered Choco Upgrade           Ready
     PS C:\Chocotemp>
     #>
-    function Test-ChocoUpgradeTrigger {
         [CmdletBinding()]
         param(
             [Parameter(Mandatory=$true,ValueFromPipeline=$True)]

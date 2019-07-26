@@ -1,4 +1,12 @@
 # Chocolatey-tools Release History
+## 0.4.10 - 7/26/2019
+
+### Added
+*Get-LatestChocoPackage - retrives latest version of package from community repo.
+*Add-ChocoIntPackage - Internalizes, installs and pushes a new package to an internal repo.
+
+### Fixed
+* Put comment-based help in right place in functions.
 ## 0.4.10 - 7/15/2019
 
 ### Added

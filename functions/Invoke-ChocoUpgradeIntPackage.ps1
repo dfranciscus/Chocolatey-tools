@@ -1,3 +1,5 @@
+
+function Invoke-ChocoUpgradeIntPackage {
 <#
 .SYNOPSIS
 Takes PSobject to perform a choco upgrade an each package
@@ -14,7 +16,6 @@ curl         Upgrade Success 7.64.1        C:\Chocotemp\curl.7.64.1.nupkg
 GoogleChrome Upgrade Success 74.0.3729.131 {C:\Chocotemp\chocolatey-core.extension.1.3.3.nupkg, C:\Chocotemp\GoogleChr...
 
 #>
-function Invoke-ChocoUpgradeIntPackage {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true,ValueFromPipeline=$True)]

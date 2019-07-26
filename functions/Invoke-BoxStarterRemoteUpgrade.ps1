@@ -1,3 +1,5 @@
+
+function Invoke-BoxStarterRemoteUpgrade {
 <#
 .SYNOPSIS
     Uses Install-Boxstarterpackage to install packages remotely. In addition, provides ability to deploy new packages and exclude packages.
@@ -13,7 +15,6 @@
 
       Invoke-BoxStarterRemoteUpgrade -ComputerName winclient2 -Credential $DomainCred -AdditionalPackages curl,git -Parallel -ScriptPath C:\Windows\Temp\BoxstarterUpgrade.txt
 #>
-function Invoke-BoxStarterRemoteUpgrade {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]

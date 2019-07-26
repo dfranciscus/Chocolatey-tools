@@ -1,3 +1,4 @@
+function Invoke-ChocoInternalizePackage {
 <#
 .SYNOPSIS
     Takes PSobject as input to internalize packages
@@ -14,7 +15,6 @@ curl         Internalize Success 7.64.1        C:\Chocotemp\curl.7.64.1.nupkg
 GoogleChrome Internalize Success 74.0.3729.131 {C:\Chocotemp\chocolatey-core.extension.1.3.3.nupkg, C:\Chocotemp\Googl...
 
 #>
-function Invoke-ChocoInternalizePackage {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true,ValueFromPipeline=$True)]

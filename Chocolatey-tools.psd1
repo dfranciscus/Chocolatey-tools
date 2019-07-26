@@ -12,7 +12,7 @@
 RootModule = 'Chocolatey-tools.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.4.10'
+ModuleVersion = '0.5.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()

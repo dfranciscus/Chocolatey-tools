@@ -1,3 +1,5 @@
+
+function Push-ChocoIntPackage {
 <#
 .SYNOPSIS
     Short description
@@ -18,7 +20,6 @@ chocolatey-core.extension Push Success 1.3.3         C:\Chocotemp\chocolatey-cor
 GoogleChrome              Push Success 74.0.3729.131 C:\Chocotemp\GoogleChrome.74.0.3729.131.nupkg
 
 #>
-function Push-ChocoIntPackage {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true,ValueFromPipeline=$True)]

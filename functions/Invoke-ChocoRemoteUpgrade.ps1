@@ -1,4 +1,6 @@
-<#
+
+function Invoke-ChocoRemoteUpgrade {
+    <#
 .SYNOPSIS
     Use PowerShell remoting with to remotely update clients by adding and excluding packages. This function uses
     Invoke-Command to connect and run choco upgrade for any outdated packages.
@@ -26,7 +28,6 @@ Computer : WINCLIENT
 .EXAMPLE
     Another example of how to use this cmdlet
 #>
-function Invoke-ChocoRemoteUpgrade {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
